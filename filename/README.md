@@ -1,3 +1,9 @@
-# filename
+# rename.sh
 
-simple script to rename ```.png``` and ```.jpg``` file in folders
+Simple script to rename ```.png``` and ```.jpg``` files in folders
+
+usage : 
+```bash
+source rename.sh [path-to-folder]
+```
+
