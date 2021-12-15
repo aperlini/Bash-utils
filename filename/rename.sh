@@ -26,8 +26,8 @@ function file_extension {
 
 function save {
    origin=$1
-   rename="$2/$3$4"
-   /bin/mv $origin $rename
+   dest="$2/$3$4"
+   /bin/mv $origin $dest
 }
 
 function parse {
