@@ -36,7 +36,6 @@ function parse {
       if [[ -f $FILE ]]; then 
          EXT="$(file_extension $FILE)"
          i=$((i+1))
-         EXTENT=${FILE##*.} # echo 'png'
          PATH=${FILE%/*} 
          save $FILE $PATH $i $EXT
       else
