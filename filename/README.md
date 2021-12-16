@@ -4,7 +4,7 @@ Simple script to rename ```.png``` and ```.jpg``` files in folders by index posi
 
 usage : 
 ```bash
-source rename.sh [path-to-folder]
+source rename.sh [path-to-folder] [pre]
 ```
 
 
