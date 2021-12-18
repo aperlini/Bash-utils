@@ -1,17 +1,4 @@
-#!/bin/bash
-
-FOLDER="$1"
-PRE="$2"
-
-if [[ $# -lt 1 ]]; then
-   echo "usage : rename.sh folder [prepend]"
-else
-   if [[ -d $FOLDER ]]; then
-      parse $FOLDER $PRE
-   else
-      echo "$FOLDER is not a folder."
-   fi
-fi
+#! /bin/bash
 
 function file_extension {
    if [[ -f $1 ]]; then
@@ -48,8 +35,23 @@ function parse {
          echo "$FILE is not valid"
       fi
    done
-   echo "$i file(s) successfully renamed"
+   echo "$INDEX file(s) successfully renamed"
 }
+
+
+FOLDER="$1"
+PRE="$2"
+
+if [[ $# -lt 1 ]]; then
+   echo "usage : rename.sh folder [prepend]"
+else
+   if [[ -d $FOLDER ]]; then
+      parse $FOLDER $PRE
+   else
+      echo "$FOLDER is not a folder."
+   fi
+fi
+
 
 
 
