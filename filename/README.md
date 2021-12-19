@@ -9,8 +9,8 @@ bash rename.sh [path-to-folder] [pre]
 
 *Before*
 
-<img src="/Users/adrianoperlini/Documents/code/bash/utils/filename/img/before.png" alt="before"  />  
+<img src="img/before.png" alt="before"  />  
 
 *After*
 
-<img src="/Users/adrianoperlini/Documents/code/bash/utils/filename/img/after.png" alt="after" />  
+<img src="img/after.png" alt="after" />  
