@@ -1,10 +1,11 @@
-# rename.sh
+rename.sh
+=========
 
-Simple script to rename ```.png``` and ```.jpg``` files in folders by index position and / or prefix
+Simple script to rename ```.png``` and ```.jpg``` files in folders by index position (given by the iteration on the file system). In addition it is possible to specify a prefix that will be set before the index.
 
-usage : 
+Usage : 
 ```bash
-bash rename.sh [path-to-folder] [pre]
+./rename.sh <path-to-folder> [prefix]
 ```
 
 *Before*
