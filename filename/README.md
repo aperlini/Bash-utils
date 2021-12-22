@@ -8,10 +8,41 @@ Usage :
 ./rename.sh <path-to-folder> [prefix]
 ```
 
-*Before*
+Example:
 
-<img src="img/before.png" alt="before"  />  
+Assume we want to rename a bunch of JPG files in folder `${TARGET_DIR}` listed here:
+```bash
+$ ls -1 ${TARGET_DIR}
+file_a.jpg
+file_b.jpg
+file_c.jpg
+```
 
-*After*
+By default:
+```bash
+$ ./rename.sh ${TARGET_DIR}
+```
 
-<img src="img/after.png" alt="after" />  
+The files will be renamed as follows:
+
+```bash
+$ ls -1 ${TARGET_DIR}
+1.jpg
+2.jpg
+3.jpg
+```
+
+When executing the script with prefix `pre`:
+
+```bash
+$ ./rename.sh ${TARGET_DIR} hello-david
+```
+
+The files will be renamed as follows:
+
+```bash
+$ ls -1 ${TARGET_DIR}
+pre-1.jpg
+pre-2.jpg
+pre-3.jpg
+```
