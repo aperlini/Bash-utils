@@ -21,16 +21,24 @@ function save {
 function parse {
    INDEX=0
    FORMAT=$2
+   IGNORE=$3
+   EXT=""
    for FILE in $1/*; do
       if [[ -f $FILE ]]; then 
          EXT="$(file_extension $FILE)"
-         INDEX=$((INDEX+1))
-         PATH=${FILE%/*} 
-         F="$INDEX.$EXT"
-         if [[ -n $FORMAT ]]; then
-            F="$PRE-$INDEX.$EXT"
+         if [[ "$EXT" == "png" || "$EXT" == "jpg"  ]]; then
+            INDEX=$((INDEX+1))
+            PATH=${FILE%/*} 
+            F="$INDEX.$EXT"
+            if [[ -n $FORMAT ]]; then
+               F="$PRE-$INDEX.$EXT"
+            fi
+            save $FILE $PATH $F
+         else
+            if [[ -z "${IGNORE}" ]]; then
+               echo $EXT
+            fi
          fi
-         save $FILE $PATH $F
       else
          echo "$FILE is not valid"
       fi
@@ -38,19 +46,37 @@ function parse {
    echo "$INDEX file(s) successfully renamed"
 }
 
+# -- MAIN -- #
 
 FOLDER="$1"
 PRE="$2"
+IGNORE=""
 
-if [[ $# -lt 1 ]]; then
-   echo "usage : rename.sh folder [prepend]"
+## Parsing Options ##
+while getopts 'i:h' opt; do
+   case "$opt" in
+      i) 
+         FOLDER="$2"
+         PRE="$3"
+         IGNORE="I"
+         ;;
+   esac
+done
+shift "$(($OPTIND -1))"
+
+usage() { echo "Usage: $0 [-i] <path-to-folder> [prefix]" 1>&2; exit 1; }
+
+if [ -z "${FOLDER}" ]; then
+   usage
 else
    if [[ -d $FOLDER ]]; then
-      parse $FOLDER $PRE
+      parse $FOLDER $PRE $IGNORE
    else
       echo "$FOLDER is not a folder."
    fi
 fi
+
+
 
 
 
