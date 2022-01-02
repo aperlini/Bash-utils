@@ -35,16 +35,20 @@ $ ls -1 ${TARGET_DIR}
 When executing the script with prefix `pre`:
 
 ```bash
-$ ./rename.sh ${TARGET_DIR} hello-david
+$ ./rename.sh ${TARGET_DIR} my-prefix
 ```
 
 The files will be renamed as follows:
 
 ```bash
 $ ls -1 ${TARGET_DIR}
-pre-1.jpg
-pre-2.jpg
-pre-3.jpg
+my-prefix-1.jpg
+my-prefix-2.jpg
+my-prefix-3.jpg
 ```
+To ignore warnings with other file types we simple add option -i :
 
+```bash
+$ ./rename.sh -i ${TARGET_DIR} my-prefix
+```
 
