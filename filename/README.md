@@ -46,7 +46,7 @@ my-prefix-1.jpg
 my-prefix-2.jpg
 my-prefix-3.jpg
 ```
-To ignore warnings with other file types we simple add option -i :
+To ignore warnings with incompatible file types we simple add option -i :
 
 ```bash
 $ ./rename.sh -i ${TARGET_DIR} my-prefix
