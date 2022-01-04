@@ -32,7 +32,7 @@ $ ls -1 ${TARGET_DIR}
 3.jpg
 ```
 
-When executing the script with prefix `pre`:
+When executing the script with prefix `my-prefix`:
 
 ```bash
 $ ./rename.sh ${TARGET_DIR} my-prefix
