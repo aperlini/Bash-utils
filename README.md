@@ -1,8 +1,9 @@
-Bash utils
-==========
-A collection of scripts that I find useful or was just curious to play with (WIP)
+Bash utils and automation scripts
+=================================
+A collection of scripts to automate things
 
 Scripts:
 
 - [cutup](cutup)
 - [filename](filename)
+- [preset-update](preset-update)
