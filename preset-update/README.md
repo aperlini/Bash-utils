@@ -2,6 +2,8 @@
 
 Automation script for `concrete-wf` patch. Script update *pattrstorage* preset file (`.json`) and will either add or remove audio file based on its position index in folder.
 
+![screenshot](screenshot.png)
+
 ## Structure
 
 ```bash
