@@ -7,3 +7,4 @@ Scripts:
 - [cutup](cutup)
 - [filename](filename)
 - [preset-update](preset-update)
+- [weblock-to-md](weblock-to-md)
