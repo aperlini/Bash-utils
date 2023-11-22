@@ -8,8 +8,6 @@ if [[ ! -d "$folder" ]]; then
 	mkdir $folder
 fi
 
-echo "fils de pute"
-
 for entry in *; do
     echo "$entry"
     if [[ ! -d "$entry" ]] && [[ "${entry#*.}" == "webloc" ]]; then
