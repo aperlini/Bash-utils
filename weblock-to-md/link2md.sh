@@ -9,8 +9,7 @@ if [[ ! -d "$folder" ]]; then
 fi
 
 for entry in *; do
-    echo "$entry"
-    if [[ ! -d "$entry" ]] && [[ "${entry#*.}" == "webloc" ]]; then
+    if [[ ! -d "$entry" ]] && [[ "${entry##*.}" == "webloc" ]]; then
         link=$(cat "$entry" | grep -oP '(?<=<string>).*?(?=</string>)')
         title=$(basename -s '.webloc' "$entry") 
         echo "[$title]($link)" >> $folder/links.md
