@@ -1,80 +1,55 @@
 #! /bin/bash
 
-function file_extension {
-   if [[ -f $1 ]]; then
-      case "$1" in
-         *.png) echo 'png' ;;
-         *.jpg) echo 'jpg' ;;
-         *) echo "$1 is not JPG or PNG file" ;;
-      esac
-   else
-      echo "$1 : file extension not valid"
-   fi
-}
+set -e
 
-function save {
-   origin=$1
-   dest="$2/$3"
-   /bin/mv $origin $dest
-}
-
-function parse {
-   INDEX=0
-   FORMAT=$2
-   IGNORE=$3
-   EXT=""
-   for FILE in $1/*; do
-      if [[ -f $FILE ]]; then 
-         EXT="$(file_extension $FILE)"
-         if [[ "$EXT" == "png" || "$EXT" == "jpg"  ]]; then
-            INDEX=$((INDEX+1))
-            PATH=${FILE%/*} 
-            F="$INDEX.$EXT"
-            if [[ -n $FORMAT ]]; then
-               F="$PRE-$INDEX.$EXT"
+function rename {
+   count=0
+   prefix=$1   
+   ignore=$2
+   for entry in *; do
+      if [[ -f $entry ]]; then 
+         file_ext="${entry##*.}"
+         if [[ "$file_ext" == "png" || "$file_ext" == "jpg"  ]]; then
+            count=$((count+1))
+            F="$count.$file_ext" 
+            if [[ -n $prefix ]]; then
+               F="$prefix-$count.$file_ext"
             fi
-            save $FILE $PATH $F
+            $(mv "$entry" "$F") 
          else
-            if [[ -z "${IGNORE}" ]]; then
-               echo $EXT
+            if [[ -z "${ignore}" ]]; then
+               echo $file_ext
             fi
          fi
       else
-         echo "$FILE is not valid"
+         echo "$entry is not valid"
       fi
    done
-   echo "$INDEX file(s) successfully renamed"
+   if [[ "$count" -gt 0 ]]; then
+      echo "$count file(s) successfully renamed"
+   fi
 }
 
 # -- MAIN -- #
 
-FOLDER="$1"
-PRE="$2"
+PRE="$1"
 IGNORE=""
 
 ## Parsing Options ##
 while getopts 'i:h' opt; do
    case "$opt" in
       i) 
-         FOLDER="$2"
-         PRE="$3"
+         PRE="$2  "
          IGNORE="I"
          ;;
    esac
 done
 shift "$(($OPTIND -1))"
 
-usage() { echo "Usage: $0 [-i] <path-to-folder> [prefix]" 1>&2; exit 1; }
+rename $PRE $IGNORE
+# usage() { echo "Usage: $0 [-i] [prefix]" 1>&2; exit 1; }
 
-if [ -z "${FOLDER}" ]; then
-   usage
-else
-   if [[ -d $FOLDER ]]; then
-      parse $FOLDER $PRE $IGNORE
-   else
-      echo "$FOLDER is not a folder."
-   fi
-fi
+
 
 
 
