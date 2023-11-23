@@ -3,6 +3,7 @@
 set -e
 
 folder="exports"
+declare -i counter
 
 if [[ ! -d "$folder" ]]; then
 	mkdir $folder
@@ -14,10 +15,14 @@ for entry in *; do
         title=$(basename -s '.webloc' "$entry") 
         echo "[$title]($link)" >> $folder/links.md
         rm "$entry"
+        counter+=1
     fi
 done
 
-echo "========================================================"
-echo "all links where extracted and saved => ./export/links.md"
-echo "========================================================"
-
+if [[ $counter -eq 0 ]]; then
+    echo "no .webloc file present"
+else
+    echo "===================================================================="
+    echo "${counter} links where extracted and saved here => ./export/links.md"
+    echo "===================================================================="
+fi
