@@ -17,11 +17,10 @@ patterns=$(grep -E '^\!\[(.*?)\]$' $filename)
 
 for old in $patterns
 do
-	echo $old
-	# name=${old[@]:2:-1}
-	# new="${old}($folder/$name.png)"
-	# sed -i "s/${old//[-!\[\]\/]/\\&}/${new//[-!\[\]\/]/\\&}/g" $filename
-	# echo -e $new
+	name=${old[@]:2:-1}
+	new="${old}($folder/$name.png)"
+	sed -i "s/${old//[-!\[\]\/]/\\&}/${new//[-!\[\]\/]/\\&}/g" $filename
+	echo -e $new
 done
 
 echo -e "\ndone"
