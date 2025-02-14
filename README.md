@@ -1,10 +1,9 @@
-Bash utils and automation scripts
+Misc bash scripts
 =================================
-A collection of scripts to automate things
+> script utils 
 
-Scripts:
-
-- [cutup](cutup)
-- [filename](filename)
-- [preset-update](preset-update)
-- [weblock-to-md](weblock-to-md)
+- [cutup](cutup/README.md)
+- [filename](filename/README.md)
+- [preset-update](preset-update/README.md)
+- [weblock-to-md](weblock-to-md/README.md)
+- [screens-to-md](screens-md/README.md)
