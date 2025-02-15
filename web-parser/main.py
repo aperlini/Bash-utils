@@ -3,7 +3,6 @@
 import os, sys, re, bs4, requests
 from pathlib import Path
 from bs4 import BeautifulSoup
-from typing import Self
 
 class BandcampParser:
 	
@@ -16,7 +15,7 @@ class BandcampParser:
 		self.filename = f'{self.artist}-collection.md'
 		self.filepath = f'{self.folder}/{self.filename}'
 
-	def save(self)-> Self:
+	def save(self):
 		if os.path.exists(self.folder) == False:
 			os.mkdir(self.folder, mode=0o775)	
 		with open(self.filepath, 'w', encoding='utf-8') as file:
@@ -34,7 +33,7 @@ class BandcampParser:
 			self.file_content = ""
 			self.albums = 'music'
 
-		def collection(self)-> Self:
+		def collection(self):
 			r = requests.get(f'{self.base_url}/{self.albums}')
 			soup = BeautifulSoup(r.content, "html.parser")
 			artist = soup.find(id='band-name-location').find('span', 'title').text
@@ -42,7 +41,7 @@ class BandcampParser:
 			self.bs4_content = soup.find_all('li', class_='music-grid-item')
 			return self
 
-		def parse(self)-> Self:
+		def parse(self):
 			self.file_content = f'# {self.artist} collection\n'
 			for item in self.bs4_content:
 				wrap = item.find('a')
@@ -56,7 +55,7 @@ class BandcampParser:
 			return BandcampParser(self.base_url, self.artist, self.bs4_content, self.file_content)
 
 
-def main(url:str)-> None:
+def main(url:str):
 	try:
 		BandcampParser.Builder(url).collection().parse().build().save()
 	except Exception as e:
