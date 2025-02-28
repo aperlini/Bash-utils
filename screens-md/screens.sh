@@ -13,12 +13,12 @@ else
 	folder=${folder////} # remove "/"
 fi
 
-regex='.*?\!\[(.*?)\]'
+regex='^.*?\!\[(.*?)\]$' # pattern only matches : `![]`
 patterns=$(grep -E $regex $filename)
 
 for old in $patterns
 do
-    name=$(echo $old | sed 's/[^a-zA-Z\-]//g')
+    name=$(echo $old | sed 's/[^a-zA-Z0-9\-]//g')
 	if [ -n "$name" ]; then
 		new="${old}($folder/$name.png)"
 		sed -i "s/${old//[-!\[\]\/]/\\&}/${new//[-!\[\]\/]/\\&}/g" $filename
@@ -27,4 +27,3 @@ do
 done
 
 echo -e "\ndone"
-
