@@ -96,9 +96,12 @@ class JobParser:
         for job in self.results():
             self.joblist.append(
                 Job(
+					self.attr_exists(
+						job.find("div", class_="base-card"), "data-entity-urn"
+					).split(':')[-1],
                     self.attr_exists(
                         job.find("a", class_="base-card__full-link"), "href"
-                    ),
+                    ).split('?')[0],
                     self.value_exists(
                         job.find("h3", class_="base-search-card__title")
                     ).strip(),
@@ -121,16 +124,17 @@ class JobParser:
             filepath = f"{CSV_FILES}/{self.file[0:-5]}.csv"
             with open(filepath, "w", newline="") as f:
                 writer = csv.writer(f)
-                writer.writerow(["posted", "title", "company", "location"])
+                writer.writerow(["id", "posted", "title", "company", "location", "src"])
                 for job in self.joblist:
-                    writer.writerow([job.posted, job.title, job.company, job.location])
+                    writer.writerow([job.id, job.posted, job.title, job.company, job.location, job.link])
             print(f"{filepath} successfully saved!")
         except Exception as e:
             print(f"Error : {e}")
 
 
 class Job:
-    def __init__(self, link, title, company, location, posted):
+    def __init__(self, id, link, title, company, location, posted):
+        self.id = id
         self.link = link
         self.title = title
         self.company = company
