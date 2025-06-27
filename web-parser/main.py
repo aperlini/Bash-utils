@@ -34,11 +34,18 @@ class BandcampParser:
 			self.albums = 'music'
 
 		def collection(self):
-			r = requests.get(f'{self.base_url}/{self.albums}')
-			soup = BeautifulSoup(r.content, "html.parser")
-			artist = soup.find(id='band-name-location').find('span', 'title').text
-			self.artist = re.sub(r'\s', '-', artist)
-			self.bs4_content = soup.find_all('li', class_='music-grid-item')
+			try:
+				r = requests.get(f'{self.base_url}/{self.albums}')
+				soup = BeautifulSoup(r.content, "html.parser")
+				if r.status_code != 200:
+					title = soup.select('h1')[0].text
+					print(title)
+					exit()
+				artist = soup.find(id='band-name-location').find('span', 'title').text
+				self.artist = re.sub(r'\s', '-', artist)
+				self.bs4_content = soup.find_all('li', class_='music-grid-item')
+			except Exception as err:
+				print(err)
 			return self
 
 		def parse(self):
