@@ -10,10 +10,10 @@ if [[ ! -d "$folder" ]]; then
 fi
 
 for entry in *; do
-    if [[ ! -d "$entry" ]] && [[ "${entry##*.}" == "webloc" ]]; then
-        link=$(cat "$entry" | grep -oP '(?<=<string>).*?(?=</string>)')
+    if [[ ! -d "$entry" ]] && [[ "${entry##*.}" == "webloc" ]]; then  
+        link=$(awk 'match($0, /<string>.*<\/string>/) { sub(/.*<string>/,""); sub(/<\/string>.*/,""); print }' "$entry")
         title=$(basename -s '.webloc' "$entry") 
-        echo "[$title]($link)" >> $folder/links.md
+        echo "- [$title]($link)" >> "$folder/$entry.md"
         rm "$entry"
         counter+=1
     fi
