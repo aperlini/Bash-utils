@@ -6,4 +6,4 @@ requests==2.32.4
 soupsieve==2.6
 typing==3.7.4.3
 typing-extensions==4.12.2
-urllib3==2.6.0
+urllib3==2.6.3
